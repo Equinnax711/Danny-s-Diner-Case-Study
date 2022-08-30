@@ -107,6 +107,10 @@ ORDER BY most_purchased DESC
 LIMIT 1
 ~~~
 
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q4%20table.jpg">
+</p>
+
 ### 5. Which item was the most popular for each customer?
 ~~~ruby
 WITH most_popular AS 
@@ -121,11 +125,20 @@ JOIN dannys_diner.sales
 ON menu.product_id = sales.product_id
 GROUP BY sales.customer_id, menu.product_name)
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT customer_id, product_name, num_orders
 FROM most_popular
 WHERE rank = 1
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%202.jpg">
+</p>
 
 ### 6. Which item was purchased first by the customer after they became a member?
 ~~~ruby
@@ -143,6 +156,11 @@ ON sales.customer_id = members.customer_id
 WHERE sales.order_date >= members.join_date
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT 
 customer_id,
@@ -154,6 +172,10 @@ ON menu.product_id = diner_member_transactions.product_id
 WHERE rank = 1
 ORDER BY customer_id ASC
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%202.jpg">
+</p>
 
 ### 7. Which item was purchased just before the customer became a member?
 ~~~ruby
@@ -171,6 +193,11 @@ ON sales.customer_id = members.customer_id
 WHERE sales.order_date < members.join_date
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT 
 customer_id,
@@ -182,6 +209,10 @@ ON menu.product_id = before_member_transactions.product_id
 WHERE rank = 1
 ORDER BY customer_id ASC
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%202.jpg">
+</p>
 
 ### 8. What is the total items and amount spent for each member before they became a member?
 ~~~ruby
