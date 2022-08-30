@@ -2,7 +2,7 @@
 Thank you Danny for the case study! You can find the case study [here](https://8weeksqlchallenge.com/case-study-1/).
 ## Introduction
 <p align="center">
-  <img width="700" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/158b40911c3db14133a2d955bd662cedfaee5d49/Pictures/danny's%20diner.png">
+  <img width="700" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/158b40911c3db14133a2d955bd662cedfaee5d49/Pictures/danny's%20diner.png">
 </p>
 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
@@ -21,7 +21,7 @@ He plans on using these insights to help him decide whether he should expand the
 There are 3 key datasets for this case study, of which the relationship diagram between the three are shown below.
 
 <p align="center">
-  <img width="700" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
+  <img width="700" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
 </p>
 
 ## Case Study Questions
