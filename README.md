@@ -201,10 +201,10 @@ customer_id,
 sales.product_id,
 menu.price,
 CASE 
-	WHEN sales.product_id = 1
-	THEN (menu.price * 20)
-	ELSE (menu.price * 10)
-    	END AS points
+    WHEN sales.product_id = 1
+    THEN (menu.price * 20)
+    ELSE (menu.price * 10)
+    END AS points
 FROM
 dannys_diner.sales
 LEFT JOIN dannys_diner.menu
@@ -256,8 +256,8 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-	WHEN sales.order_date >= members.join_date
-    	THEN 'Y'
+WHEN sales.order_date >= members.join_date
+THEN 'Y'
     	ELSE 'N'
     	END AS member
 FROM dannys_diner.sales
