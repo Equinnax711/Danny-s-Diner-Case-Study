@@ -1,7 +1,9 @@
 # Danny's Diner Case Study
 Thank you Danny for the case study! You can find the case study [here](https://8weeksqlchallenge.com/case-study-1/).
 ## Introduction
-![ramen bowl](https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/a6d4f26a7be5f110a1f632b934184aa2d3c5d5fb/Pictures/danny's%20diner.png)
+<p align="center">
+  <img width="700" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/158b40911c3db14133a2d955bd662cedfaee5d49/Pictures/danny's%20diner.png">
+</p>
 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
 
