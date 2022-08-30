@@ -56,10 +56,10 @@ ORDER BY total_price DESC
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
 SELECT
-customer_id,
-COUNT(DISTINCT(order_date))
-FROM dannys_diner.sales
-GROUP BY customer_id
+	customer_id,
+    COUNT(DISTINCT(order_date))
+FROM dbo.sales
+GROUP BY customer_id;
 ~~~
 
 <p align="center">
@@ -73,8 +73,8 @@ WITH ordered_sales AS
   SELECT customer_id, order_date, product_name,
   DENSE_RANK() OVER(PARTITION BY sales.customer_id 
   ORDER BY sales.order_date) AS rank
-  FROM dannys_diner.sales
-  JOIN dannys_diner.menu
+  FROM dbo.sales
+  JOIN dbo.menu
   ON sales.product_id = menu.product_id
   )
 ~~~
@@ -96,14 +96,13 @@ GROUP BY customer_id, product_name
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 ~~~ruby
-SELECT 
+SELECT TOP 1
 COUNT(customer_id) AS most_purchased, product_name
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.menu
+FROM dbo.sales
+LEFT JOIN dbo.menu
 ON menu.product_id = sales.product_id
 GROUP BY product_name
-ORDER BY most_purchased DESC
-LIMIT 1
+ORDER BY most_purchased DESC;
 ~~~
 
 <p align="center">
@@ -119,8 +118,8 @@ customer_id,
 product_name,
 COUNT(menu.product_id) AS num_orders,
 DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY COUNT(menu.product_id) DESC) AS rank
-FROM dannys_diner.menu
-JOIN dannys_diner.sales 
+FROM dbo.menu
+JOIN dbo.sales 
 ON menu.product_id = sales.product_id
 GROUP BY sales.customer_id, menu.product_name)
 ~~~
@@ -132,7 +131,7 @@ GROUP BY sales.customer_id, menu.product_name)
 ~~~ruby
 SELECT customer_id, product_name, num_orders
 FROM most_popular
-WHERE rank = 1
+WHERE rank = 1;
 ~~~
 
 <p align="center">
@@ -149,8 +148,8 @@ sales.order_date,
 members.join_date,
 sales.product_id, 
 DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY sales.order_date) AS rank
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.members
+FROM dbo.sales
+LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
 WHERE sales.order_date >= members.join_date
 )
@@ -166,10 +165,10 @@ customer_id,
 menu.product_name,
 order_date
 FROM diner_member_transactions
-LEFT JOIN dannys_diner.menu 
+LEFT JOIN dbo.menu 
 ON menu.product_id = diner_member_transactions.product_id
 WHERE rank = 1
-ORDER BY customer_id ASC
+ORDER BY customer_id ASC;
 ~~~
 
 <p align="center">
@@ -186,8 +185,8 @@ sales.order_date,
 members.join_date,
 sales.product_id, 
 DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY sales.order_date DESC) AS rank
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.members
+FROM dbo.sales
+LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
 WHERE sales.order_date < members.join_date
 )
@@ -203,10 +202,10 @@ customer_id,
 menu.product_name,
 order_date
 FROM before_member_transactions
-LEFT JOIN dannys_diner.menu 
+LEFT JOIN dbo.menu 
 ON menu.product_id = before_member_transactions.product_id
 WHERE rank = 1
-ORDER BY customer_id ASC
+ORDER BY customer_id ASC;
 ~~~
 
 <p align="center">
@@ -222,8 +221,8 @@ sales.customer_id,
 sales.order_date, 
 members.join_date,
 sales.product_id 
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.members
+FROM dbo.sales
+LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
 WHERE sales.order_date < members.join_date
 )
@@ -239,9 +238,9 @@ customer_id,
 COUNT(menu.product_id) AS num_items, 
 SUM(menu.price) AS total_spent 
 FROM before_member_transactions
-LEFT JOIN dannys_diner.menu 
+LEFT JOIN dbo.menu 
 ON menu.product_id = before_member_transactions.product_id
-GROUP BY customer_id
+GROUP BY customer_id;
 ~~~
 
 <p align="center">
@@ -257,13 +256,13 @@ customer_id,
 sales.product_id,
 menu.price,
 CASE 
-    WHEN sales.product_id = 1
+	WHEN sales.product_id = 1
     THEN (menu.price * 20)
     ELSE (menu.price * 10)
     END AS points
 FROM
-dannys_diner.sales
-LEFT JOIN dannys_diner.menu
+dbo.sales
+LEFT JOIN dbo.menu
 ON menu.product_id = sales.product_id
 )
 ~~~
@@ -275,7 +274,7 @@ ON menu.product_id = sales.product_id
 ~~~ruby
 SELECT customer_id, SUM(points) FROM points
 GROUP BY customer_id
-ORDER BY customer_id ASC
+ORDER BY customer_id ASC;
 ~~~
 
 <p align="center">
@@ -288,10 +287,10 @@ WITH double_points_week AS
 (
 SELECT
 *,
-join_date + integer '6' AS double_points_date,
-DATE('2021-01-31') AS last_date
+DATEADD(DAY, 6, join_date) AS double_points_date,
+EOMONTH('2021-01-31') AS last_date
 FROM 
-dannys_diner.members
+dbo.members
 )
 ~~~
 
@@ -302,20 +301,19 @@ dannys_diner.members
 ~~~ruby
 SELECT
 double_points_week.customer_id,
-SUM(
-CASE
+SUM(CASE
     WHEN menu.product_name = 'sushi' THEN 20 * menu.price
     WHEN sales.order_date BETWEEN double_points_week.join_date AND double_points_week.double_points_date THEN 20 * menu.price
     ELSE menu.price * 10
-END)
+	END)
     AS points
 FROM double_points_week
-LEFT JOIN dannys_diner.sales
+LEFT JOIN dbo.sales
 ON double_points_week.customer_id = sales.customer_id
-LEFT JOIN dannys_diner.menu
+LEFT JOIN dbo.menu
 ON sales.product_id = menu.product_id
 WHERE sales.order_date < double_points_week.last_date
-GROUP BY double_points_week.customer_id
+GROUP BY double_points_week.customer_id;
 ~~~
 
 <p align="center">
@@ -330,16 +328,16 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-    WHEN sales.order_date >= members.join_date
+	WHEN sales.order_date >= members.join_date
     THEN 'Y'
     ELSE 'N'
     END AS member
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.menu
+FROM dbo.sales
+LEFT JOIN dbo.menu
 ON menu.product_id = sales.product_id
-LEFT JOIN dannys_diner.members
+LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
-ORDER BY customer_id, sales.order_date, menu.product_name
+ORDER BY customer_id, sales.order_date, menu.product_name;
 ~~~
 
 <p align="center">
@@ -356,16 +354,15 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-    WHEN sales.order_date >= members.join_date
+	WHEN sales.order_date >= members.join_date
     THEN 'Y'
     ELSE 'N'
     END AS member
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.menu
+FROM dbo.sales
+LEFT JOIN dbo.menu
 ON menu.product_id = sales.product_id
-LEFT JOIN dannys_diner.members
+LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
-ORDER BY customer_id, sales.order_date, menu.product_name
 )
 ~~~
 
@@ -377,10 +374,10 @@ ORDER BY customer_id, sales.order_date, menu.product_name
 SELECT 
 *,
 CASE 
-    WHEN q11_table.member = 'N' THEN NULL
-    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
+	WHEN q11_table.member = 'N' THEN NULL
+    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY customer_id, order_date, product_name) 
     END AS ranking
-FROM q11_table
+FROM q11_table;
 ~~~
 
 <p align="center">
