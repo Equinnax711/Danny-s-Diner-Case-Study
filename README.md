@@ -98,8 +98,8 @@ WITH ordered_sales AS
 
 Steps:
 - Create an intermediate table.
-- Use DENSE_RANK with PARTITION BY in order to rank each transaction by order date (ASC in order to have the earliest date rank the lowest) within each subset of different customer_id.
 - LEFT JOIN the menu table onto the sales table through product id in order to have the product_name column in the intermediate table.
+- Use DENSE_RANK with PARTITION BY in order to rank each transaction by order date (ASC in order to have the earliest date rank the lowest) within each subset of different customer_id.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%201.jpg">
@@ -168,9 +168,9 @@ GROUP BY sales.customer_id, menu.product_name
 Steps:
 - Create an intermediate table.
 - COUNT the number of product_ids and name the column as num_orders
-- Use DENSE_RANK() along with PARTITION BY to rank the products by most ordered to least ordered within each subset of unique customer_id
 - LEFT JOIN the menu table onto the sales table through the product_id column to bring the product_name column over.
 - GROUP BY both customer_id and product_name to get the total counts of each unique product that each customer bought.
+- Use DENSE_RANK() along with PARTITION BY to rank the products by most ordered to least ordered within each subset of unique customer_id
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%201.jpg">
@@ -211,6 +211,12 @@ WHERE sales.order_date >= members.join_date
 )
 ~~~
 
+Steps:
+- Create an intermediate table.
+- LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
+- Use WHERE to filter out all transactions that happened before customers became members.
+- Use DENSE_RANK() along with PARTITION BY to rank the products by ASCENDING order_date within each subset of unique customer_id.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%201.jpg">
 </p>
@@ -227,9 +233,18 @@ WHERE rank = 1
 ORDER BY customer_id ASC;
 ~~~
 
+Steps:
+- From the intermediate table, select the three needed columns for the question, customer_id, product_name, and order_date.
+- LEFT JOIN the menu table onto the intermediate table through product_id to bring the product_name column over
+- Use WHERE to select all rows where the rank is 1. In this case, when rank = 1, it represents the earliest transaction at which the person was a member.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%202.jpg">
 </p>
+
+- The item purchased first by customer A after they became a member was curry.
+- The item purcahsed first by customer B after they became a member was sushi.
+- Customer C never became a member, therefore leaving them with no first meal purchased after becoming a member.
 
 ### 7. Which item was purchased just before the customer became a member?
 ~~~ruby
