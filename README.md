@@ -256,10 +256,10 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-WHEN sales.order_date >= members.join_date
-THEN 'Y'
-    	ELSE 'N'
-    	END AS member
+    WHEN sales.order_date >= members.join_date
+    THEN 'Y'
+    ELSE 'N'
+    END AS member
 FROM dannys_diner.sales
 LEFT JOIN dannys_diner.menu
 ON menu.product_id = sales.product_id
@@ -278,10 +278,10 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-	WHEN sales.order_date >= members.join_date
-    	THEN 'Y'
-    	ELSE 'N'
-    	END AS member
+    WHEN sales.order_date >= members.join_date
+    THEN 'Y'
+    ELSE 'N'
+    END AS member
 FROM dannys_diner.sales
 LEFT JOIN dannys_diner.menu
 ON menu.product_id = sales.product_id
@@ -294,9 +294,9 @@ ORDER BY customer_id, sales.order_date, menu.product_name
 SELECT 
 *,
 CASE 
-	WHEN q11_table.member = 'N' THEN NULL
-    	ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
-    	END AS ranking
+    WHEN q11_table.member = 'N' THEN NULL
+    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
+    END AS ranking
 FROM q11_table
 ~~~
 
