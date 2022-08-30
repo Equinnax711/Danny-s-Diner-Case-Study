@@ -58,8 +58,9 @@ SELECT
 FROM dannys_diner.sales
 GROUP BY customer_id
 ~~~
+
 ### 3. What was the first item from the menu purchased by each customer?
-~~~
+~~~ruby
 WITH ordered_sales AS
 (
   SELECT customer_id, order_date, product_name,
@@ -70,15 +71,73 @@ WITH ordered_sales AS
   ON sales.product_id = menu.product_id
   )
 ~~~
-~~~
+~~~ruby
 SELECT customer_id, product_name
 FROM ordered_sales
 WHERE rank = 1
 GROUP BY customer_id, product_name
 ~~~
+
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+~~~ruby
+SELECT 
+COUNT(customer_id) AS most_purchased, product_name
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.menu
+ON menu.product_id = sales.product_id
+GROUP BY product_name
+ORDER BY most_purchased DESC
+LIMIT 1
+~~~
+
 ### 5. Which item was the most popular for each customer?
+~~~ruby
+WITH most_popular AS 
+(
+SELECT 
+customer_id,
+product_name,
+COUNT(menu.product_id) AS num_orders,
+DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY COUNT(menu.product_id) DESC) AS rank
+FROM dannys_diner.menu
+JOIN dannys_diner.sales 
+ON menu.product_id = sales.product_id
+GROUP BY sales.customer_id, menu.product_name)
+~~~
+~~~ruby
+SELECT customer_id, product_name, num_orders
+FROM most_popular
+WHERE rank = 1
+~~~
+
 ### 6. Which item was purchased first by the customer after they became a member?
+~~~ruby
+WITH diner_member_transactions AS
+(
+SELECT 
+sales.customer_id,
+sales.order_date, 
+members.join_date,
+sales.product_id, 
+DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY sales.order_date) AS rank
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+WHERE sales.order_date >= members.join_date
+)
+~~~
+~~~ruby
+SELECT 
+customer_id,
+menu.product_name,
+order_date
+FROM diner_member_transactions
+LEFT JOIN dannys_diner.menu 
+ON menu.product_id = diner_member_transactions.product_id
+WHERE rank = 1
+ORDER BY customer_id ASC
+~~~
+
 ### 7. Which item was purchased just before the customer became a member?
 ### 8. What is the total items and amount spent for each member before they became a member?
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
