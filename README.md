@@ -39,12 +39,13 @@ There are 3 key datasets for this case study, of which the relationship diagram 
 ## Solutions
 For this case study, I used PostgreSQL to query data for the solutions. Aggregate, numerical, joins, temporary tables, and windows functions were some of the main functions used to complete the case study.
 ### 1. What is the total amount each customer spent at the restaurant?
-~~~
+~~~ruby
 SELECT
-  	customer_id,
-    SUM(price) AS Total_Price
+customer_id,
+SUM(price) AS Total_Price
 FROM dannys_diner.sales
-LEFT JOIN dannys_diner.menu ON menu.product_id = sales.product_id
+LEFT JOIN dannys_diner.menu 
+ON menu.product_id = sales.product_id
 GROUP BY customer_id
 ORDER BY total_price DESC
 ~~~
