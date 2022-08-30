@@ -19,7 +19,7 @@ He plans on using these insights to help him decide whether he should expand the
 There are 3 key datasets for this case study, of which the relationship diagram between the three are shown below.
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
+  <img width="700" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
 </p>
 
 ## Case Study Questions
@@ -51,7 +51,7 @@ ORDER BY total_price DESC
 ~~~
 
 <p align="center">
-  <img width="600" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
 </p>
 
 ### 2. How many days has each customer visited the restaurant?
@@ -64,7 +64,7 @@ GROUP BY customer_id
 ~~~
 
 <p align="center">
-  <img width="600" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q2%20table.jpg">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q2%20table.jpg">
 </p>
 
 ### 3. What was the first item from the menu purchased by each customer?
@@ -81,7 +81,7 @@ WITH ordered_sales AS
 ~~~
 
 <p align="center">
-  <img width="600" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%201.jpg">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%201.jpg">
 </p>
 
 ~~~ruby
@@ -92,7 +92,7 @@ GROUP BY customer_id, product_name
 ~~~
 
 <p align="center">
-  <img width="600" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%202.jpg">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%202.jpg">
 </p>
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
