@@ -24,21 +24,31 @@ There are 3 key datasets for this case study, of which the relationship diagram 
 
 ## Case Study Questions
 1. What is the total amount each customer spent at the restaurant?
-2. How many days has each customer visited the restaurant?
-3. What was the first item from the menu purchased by each customer?
-4. What is the most purchased item on the menu and how many times was it purchased by all customers?
-5. Which item was the most popular for each customer?
-6. Which item was purchased first by the customer after they became a member?
-7. Which item was purchased just before the customer became a member?
-8. What is the total items and amount spent for each member before they became a member?
-9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
-10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
-11. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
-12. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
+3. How many days has each customer visited the restaurant?
+4. What was the first item from the menu purchased by each customer?
+5. What is the most purchased item on the menu and how many times was it purchased by all customers?
+6. Which item was the most popular for each customer?
+7. Which item was purchased first by the customer after they became a member?
+8. Which item was purchased just before the customer became a member?
+9. What is the total items and amount spent for each member before they became a member?
+10. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
+11. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
+12. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
+13. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
 
 ## Solutions
 For this case study, I used PostgreSQL to query data for the solutions. Aggregate, numerical, joins, temporary tables, and windows functions were some of the main functions used to complete the case study.
 ### 1. What is the total amount each customer spent at the restaurant?
+'''
+SELECT
+  	customer_id,
+    SUM(price) AS Total_Price
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.menu ON menu.product_id = sales.product_id
+GROUP BY customer_id
+ORDER BY total_price DESC
+'''
+
 
 ### 2. How many days has each customer visited the restaurant?
 ### 3. What was the first item from the menu purchased by each customer?
