@@ -57,9 +57,9 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
 </p>
 
-- Customer A spent a total of $76
-- Customer B spent a total of $74
-- Customer C spent a total of $36
+- Customer A spent a total of $76.
+- Customer B spent a total of $74.
+- Customer C spent a total of $36.
 
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
