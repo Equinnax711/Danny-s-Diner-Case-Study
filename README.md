@@ -19,7 +19,7 @@ He plans on using these insights to help him decide whether he should expand the
 There are 3 key datasets for this case study, of which the relationship diagram between the three are shown below.
 
 <p align="center">
-  <img width="460" height="300" src="[http://www.fillmurray.com/460/300](https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg)">
+  <img width="460" height="300" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
 </p>
 
 ## Case Study Questions
