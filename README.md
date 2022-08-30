@@ -53,8 +53,8 @@ ORDER BY total_price DESC
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
 SELECT
-	customer_id,
-    COUNT(DISTINCT(order_date))
+customer_id,
+COUNT(DISTINCT(order_date))
 FROM dannys_diner.sales
 GROUP BY customer_id
 ~~~
@@ -202,9 +202,9 @@ sales.product_id,
 menu.price,
 CASE 
 	WHEN sales.product_id = 1
-    THEN (menu.price * 20)
-    ELSE (menu.price * 10)
-    END AS points
+	THEN (menu.price * 20)
+	ELSE (menu.price * 10)
+    	END AS points
 FROM
 dannys_diner.sales
 LEFT JOIN dannys_diner.menu
@@ -232,11 +232,12 @@ dannys_diner.members
 ~~~ruby
 SELECT
 double_points_week.customer_id,
-SUM(CASE
+SUM(
+CASE
     WHEN menu.product_name = 'sushi' THEN 20 * menu.price
     WHEN sales.order_date BETWEEN double_points_week.join_date AND double_points_week.double_points_date THEN 20 * menu.price
     ELSE menu.price * 10
-	END)
+END)
     AS points
 FROM double_points_week
 LEFT JOIN dannys_diner.sales
@@ -256,9 +257,9 @@ menu.product_name,
 menu.price,
 CASE 
 	WHEN sales.order_date >= members.join_date
-    THEN 'Y'
-    ELSE 'N'
-    END AS member
+    	THEN 'Y'
+    	ELSE 'N'
+    	END AS member
 FROM dannys_diner.sales
 LEFT JOIN dannys_diner.menu
 ON menu.product_id = sales.product_id
@@ -278,9 +279,9 @@ menu.product_name,
 menu.price,
 CASE 
 	WHEN sales.order_date >= members.join_date
-    THEN 'Y'
-    ELSE 'N'
-    END AS member
+    	THEN 'Y'
+    	ELSE 'N'
+    	END AS member
 FROM dannys_diner.sales
 LEFT JOIN dannys_diner.menu
 ON menu.product_id = sales.product_id
@@ -294,8 +295,8 @@ SELECT
 *,
 CASE 
 	WHEN q11_table.member = 'N' THEN NULL
-    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
-    END AS ranking
+    	ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
+    	END AS ranking
 FROM q11_table
 ~~~
 
