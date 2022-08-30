@@ -159,10 +159,18 @@ product_name,
 COUNT(menu.product_id) AS num_orders,
 DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY COUNT(menu.product_id) DESC) AS rank
 FROM dbo.menu
-JOIN dbo.sales 
+LEFT JOIN dbo.sales 
 ON menu.product_id = sales.product_id
-GROUP BY sales.customer_id, menu.product_name)
+GROUP BY sales.customer_id, menu.product_name
+)
 ~~~
+
+Steps:
+- Create an intermediate table.
+- COUNT the number of product_ids and name the column as num_orders
+- Use DENSE_RANK() along with PARTITION BY to rank the products by most ordered to least ordered within each subset of unique customer_id
+- LEFT JOIN the menu table onto the sales table through the product_id column to bring the product_name column over.
+- GROUP BY both customer_id and product_name to get the total counts of each unique product that each customer bought.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%201.jpg">
@@ -174,9 +182,17 @@ FROM most_popular
 WHERE rank = 1;
 ~~~
 
+Steps:
+- From the intermediate table, select the three needed columns for the question, customer_id, product_name, and num_orders.
+- Use the WHERE function to keep rows that have "1" for their rank. We do this because the "1" in the rank column means that this is the product that each customer bought the most.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%202.jpg">
 </p>
+
+- Customer A bought ramen the most with a total of 3 purchases.
+- Customer B purchased ramen, curry, and sushi two times each.
+- Customer C bought ramen the most with a total of 3 purchases
 
 ### 6. Which item was purchased first by the customer after they became a member?
 ~~~ruby
