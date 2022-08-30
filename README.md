@@ -10,7 +10,7 @@ Danny seriously loves Japanese food so in the beginning of 2021, he decides to e
 Danny’s Diner is in need of your assistance to help the restaurant stay afloat - the restaurant has captured some very basic data from their few months of operation but have no idea how to use their data to help them run the business.
 
 ## Problem Statement
-Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, w much money they’ve spent and which menu items are their favorites.
+Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and which menu items are their favorites.
 
 Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
 
@@ -42,16 +42,24 @@ For this case study, I used PostgreSQL to query data for the solutions. Aggregat
 SELECT
 customer_id,
 SUM(price) AS Total_Price
-FROM dannys_diner.sales
-LEFT JOIN dannys_diner.menu 
+FROM dbo.sales
+LEFT JOIN dbo.menu 
 ON menu.product_id = sales.product_id
 GROUP BY customer_id
 ORDER BY total_price DESC
 ~~~
 
+Steps: 
+- LEFT JOIN menu table onto sales table through product_id
+- GROUP BY customer_id with aggregate function on "price" column to find out how much was spent by each customer
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
 </p>
+
+- Customer A spent a total of $76
+- Customer B spent a total of $74
+- Customer C spent a total of $36
 
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
