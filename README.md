@@ -18,7 +18,10 @@ Having this deeper connection with his customers will help him deliver a better 
 He plans on using these insights to help him decide whether he should expand the existing customer loyalty program - additionally he needs help to generate some basic datasets so his team can easily inspect the data without needing to use SQL.
 There are 3 key datasets for this case study, of which the relationship diagram between the three are shown below.
 
-![relationship diagram](https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg)
+<p align="center">
+  <img width="460" height="300" src="[http://www.fillmurray.com/460/300](https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg)">
+</p>
+
 ## Case Study Questions
 1. What is the total amount each customer spent at the restaurant?
 2. How many days has each customer visited the restaurant?
