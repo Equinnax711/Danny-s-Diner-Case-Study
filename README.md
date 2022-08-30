@@ -50,9 +50,32 @@ GROUP BY customer_id
 ORDER BY total_price DESC
 ~~~
 
-
 ### 2. How many days has each customer visited the restaurant?
+~~~ruby
+SELECT
+	customer_id,
+    COUNT(DISTINCT(order_date))
+FROM dannys_diner.sales
+GROUP BY customer_id
+~~~
 ### 3. What was the first item from the menu purchased by each customer?
+~~~
+WITH ordered_sales AS
+(
+  SELECT customer_id, order_date, product_name,
+  DENSE_RANK() OVER(PARTITION BY sales.customer_id 
+  ORDER BY sales.order_date) AS rank
+  FROM dannys_diner.sales
+  JOIN dannys_diner.menu
+  ON sales.product_id = menu.product_id
+  )
+~~~
+~~~
+SELECT customer_id, product_name
+FROM ordered_sales
+WHERE rank = 1
+GROUP BY customer_id, product_name
+~~~
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 ### 5. Which item was the most popular for each customer?
 ### 6. Which item was purchased first by the customer after they became a member?
