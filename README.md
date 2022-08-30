@@ -50,8 +50,8 @@ ORDER BY total_price DESC
 ~~~
 
 Steps: 
-- LEFT JOIN menu table onto sales table through product_id
-- GROUP BY customer_id with aggregate function on "price" column to find out how much was spent by each customer
+- LEFT JOIN menu table onto sales table through product_id.
+- GROUP BY customer_id with aggregate function on "price" column to find out how much was spent by each customer.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
@@ -64,11 +64,16 @@ Steps:
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
 SELECT
-	customer_id,
+    customer_id,
     COUNT(DISTINCT(order_date))
 FROM dbo.sales
 GROUP BY customer_id;
 ~~~
+
+Steps:
+- If they ordered two items in a single day, two of the same date will be recorded. Due to this, we can't just use COUNT to find the number of times they went to the resturant. To get around this, use DISTINCT on the order_date column in order to get unique days of which the customer went to the resturant.
+- Use COUNT aggregate function in order to count all of the UNIQUE dates on which the customer went to the resturant
+- Use GROUP BY customer_id to aggregate by each customer.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q2%20table.jpg">
