@@ -139,8 +139,163 @@ ORDER BY customer_id ASC
 ~~~
 
 ### 7. Which item was purchased just before the customer became a member?
+~~~ruby
+WITH before_member_transactions AS
+(
+SELECT 
+sales.customer_id,
+sales.order_date, 
+members.join_date,
+sales.product_id, 
+DENSE_RANK() OVER(PARTITION BY sales.customer_id ORDER BY sales.order_date DESC) AS rank
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+WHERE sales.order_date < members.join_date
+)
+~~~
+~~~ruby
+SELECT 
+customer_id,
+menu.product_name,
+order_date
+FROM before_member_transactions
+LEFT JOIN dannys_diner.menu 
+ON menu.product_id = before_member_transactions.product_id
+WHERE rank = 1
+ORDER BY customer_id ASC
+~~~
+
 ### 8. What is the total items and amount spent for each member before they became a member?
+~~~ruby
+WITH before_member_transactions AS
+(
+SELECT 
+sales.customer_id,
+sales.order_date, 
+members.join_date,
+sales.product_id 
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+WHERE sales.order_date < members.join_date
+)
+~~~
+~~~ruby
+SELECT 
+customer_id, 
+COUNT(menu.product_id) AS num_items, 
+SUM(menu.price) AS total_spent 
+FROM before_member_transactions
+LEFT JOIN dannys_diner.menu 
+ON menu.product_id = before_member_transactions.product_id
+GROUP BY customer_id
+~~~
+
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
+~~~ruby
+WITH points AS
+(
+SELECT 
+customer_id, 
+sales.product_id,
+menu.price,
+CASE 
+	WHEN sales.product_id = 1
+    THEN (menu.price * 20)
+    ELSE (menu.price * 10)
+    END AS points
+FROM
+dannys_diner.sales
+LEFT JOIN dannys_diner.menu
+ON menu.product_id = sales.product_id
+)
+~~~
+~~~ruby
+SELECT customer_id, SUM(points) FROM points
+GROUP BY customer_id
+ORDER BY customer_id ASC
+~~~
+
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
+~~~ruby
+WITH double_points_week AS
+(
+SELECT
+*,
+join_date + integer '6' AS double_points_date,
+DATE('2021-01-31') AS last_date
+FROM 
+dannys_diner.members
+)
+~~~
+~~~ruby
+SELECT
+double_points_week.customer_id,
+SUM(CASE
+    WHEN menu.product_name = 'sushi' THEN 20 * menu.price
+    WHEN sales.order_date BETWEEN double_points_week.join_date AND double_points_week.double_points_date THEN 20 * menu.price
+    ELSE menu.price * 10
+	END)
+    AS points
+FROM double_points_week
+LEFT JOIN dannys_diner.sales
+ON double_points_week.customer_id = sales.customer_id
+LEFT JOIN dannys_diner.menu
+ON sales.product_id = menu.product_id
+WHERE sales.order_date < double_points_week.last_date
+GROUP BY double_points_week.customer_id
+~~~
+
 ### 11. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
+~~~ruby
+SELECT 
+sales.customer_id,
+sales.order_date,
+menu.product_name,
+menu.price,
+CASE 
+	WHEN sales.order_date >= members.join_date
+    THEN 'Y'
+    ELSE 'N'
+    END AS member
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.menu
+ON menu.product_id = sales.product_id
+LEFT JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+ORDER BY customer_id, sales.order_date, menu.product_name
+~~~
+
 ### 12. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
+~~~ruby
+WITH q11_table AS
+(
+SELECT 
+sales.customer_id,
+sales.order_date,
+menu.product_name,
+menu.price,
+CASE 
+	WHEN sales.order_date >= members.join_date
+    THEN 'Y'
+    ELSE 'N'
+    END AS member
+FROM dannys_diner.sales
+LEFT JOIN dannys_diner.menu
+ON menu.product_id = sales.product_id
+LEFT JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+ORDER BY customer_id, sales.order_date, menu.product_name
+)
+~~~
+~~~ruby
+SELECT 
+*,
+CASE 
+	WHEN q11_table.member = 'N' THEN NULL
+    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
+    END AS ranking
+FROM q11_table
+~~~
+
