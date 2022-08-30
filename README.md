@@ -229,6 +229,11 @@ ON sales.customer_id = members.customer_id
 WHERE sales.order_date < members.join_date
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT 
 customer_id, 
@@ -239,6 +244,10 @@ LEFT JOIN dannys_diner.menu
 ON menu.product_id = before_member_transactions.product_id
 GROUP BY customer_id
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%202.jpg">
+</p>
 
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
 ~~~ruby
@@ -259,11 +268,20 @@ LEFT JOIN dannys_diner.menu
 ON menu.product_id = sales.product_id
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT customer_id, SUM(points) FROM points
 GROUP BY customer_id
 ORDER BY customer_id ASC
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%202.jpg">
+</p>
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
 ~~~ruby
@@ -277,6 +295,11 @@ FROM
 dannys_diner.members
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT
 double_points_week.customer_id,
@@ -295,6 +318,10 @@ ON sales.product_id = menu.product_id
 WHERE sales.order_date < double_points_week.last_date
 GROUP BY double_points_week.customer_id
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%202.jpg">
+</p>
 
 ### 11. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
 ~~~ruby
@@ -315,6 +342,10 @@ LEFT JOIN dannys_diner.members
 ON sales.customer_id = members.customer_id
 ORDER BY customer_id, sales.order_date, menu.product_name
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q11%20table.jpg">
+</p>
 
 ### 12. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
 ~~~ruby
@@ -338,6 +369,11 @@ ON sales.customer_id = members.customer_id
 ORDER BY customer_id, sales.order_date, menu.product_name
 )
 ~~~
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q12%20table%201.jpg">
+</p>
+
 ~~~ruby
 SELECT 
 *,
@@ -348,3 +384,6 @@ CASE
 FROM q11_table
 ~~~
 
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q12%20table%202.jpg">
+</p>
