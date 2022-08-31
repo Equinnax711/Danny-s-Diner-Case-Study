@@ -24,7 +24,7 @@ There are 3 key datasets for this case study, of which the relationship diagram 
 ## Case Study Questions
 1. What is the total amount each customer spent at the restaurant?
 3. How many days has each customer visited the restaurant?
-4. What was the first item from the menu purchased by each customer?
+4. What was the first item from the menu by each customer?
 5. What is the most purchased item on the menu and how many times was it purchased by all customers?
 6. Which item was the most popular for each customer?
 7. Which item was purchased first by the customer after they became a member?
@@ -243,7 +243,7 @@ Steps:
 </p>
 
 - The item purchased first by customer A after they became a member was curry.
-- The item purcahsed first by customer B after they became a member was sushi.
+- The item purchased first by customer B after they became a member was sushi.
 - Customer C never became a member, therefore leaving them with no first meal purchased after becoming a member.
 
 ### 7. Which item was purchased just before the customer became a member?
