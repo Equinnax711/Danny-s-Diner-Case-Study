@@ -15,8 +15,24 @@ Danny wants to use the data to answer a few simple questions about his customers
 Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
 
 He plans on using these insights to help him decide whether he should expand the existing customer loyalty program - additionally he needs help to generate some basic datasets so his team can easily inspect the data without needing to use SQL.
-There are 3 key datasets for this case study, of which the relationship diagram between the three are shown below.
+There are 3 key datasets for this case study, of which they and the relationship diagram between the three are shown below.
 
+Sales Table:
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Sales.jpg">
+</p>
+
+Menu Table:
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Menu.jpg>
+</p>
+
+Members Table:
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Member.jpg">
+</p>
+
+Relationship Diagram:
 <p align="center">
   <img width="700" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/7fa4859dad1b81c75d80ef6b9b067ffd047e6842/Pictures/relationship%20diagram.jpg">
 </p>
