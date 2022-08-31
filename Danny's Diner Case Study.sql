@@ -208,7 +208,7 @@ WITH double_points_week AS
 SELECT
 *,
 DATEADD(DAY, 6, join_date) AS double_points_date,
-EOMONTH('2021-01-31') AS last_date
+('2021-01-31') AS last_date
 FROM 
 dbo.members
 )
