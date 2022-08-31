@@ -553,6 +553,10 @@ ON sales.customer_id = members.customer_id
 )
 ~~~
 
+Steps:
+- Use the same table generated from Question 11 as an intermediate table.
+- The ORDER BY has been removed from this section and will be added back in the next code block.
+
 Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q12%20table%201.jpg">
@@ -567,6 +571,13 @@ CASE
     END AS ranking
 FROM q11_table;
 ~~~
+
+Steps:
+- Select all intermediate table columns and add a ranking column.
+- To create the ranking column, we'll use a CASE statement:
+  - If the member column is "N", then output NULL.
+  - In all other cases (where the member column in "Y"), we'll want to rank the products.
+    - Use the RANK() and PARTITION BY funtions to rank the transactions by ACSENDING customer_id, order_date, and product_name within each subset of unique customer_id.
 
 Final Table:
 <p align="center">
