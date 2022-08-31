@@ -353,7 +353,7 @@ customer_id,
 sales.product_id,
 menu.price,
 CASE 
-	WHEN sales.product_id = 1
+    WHEN sales.product_id = 1
     THEN (menu.price * 20)
     ELSE (menu.price * 10)
     END AS points
@@ -363,6 +363,11 @@ LEFT JOIN dbo.menu
 ON menu.product_id = sales.product_id
 )
 ~~~
+
+Steps:
+- Create an intermediate table.
+- Use the CASE statement to create the points column. Because sushi gives us a 2x points multiplier, using the CASE statement allows us to multiply the price value by 2 when the row's product_id is "1", which is sushi. In all other scenarios of product_id, the price is multiplied by 10.
+- LEFT JOIN the menu table onto the sales table through the product_id column to bring the price column over.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%201.jpg">
@@ -374,9 +379,18 @@ GROUP BY customer_id
 ORDER BY customer_id ASC;
 ~~~
 
+Steps:
+- Select the intermediate table.
+- Use SUM to sum together the number of points collected by each customer.
+- Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%202.jpg">
 </p>
+
+- Customer A had a sum of 860 points.
+- Customer B had a sum of 940 points.
+- Customer C had a sum of 360 points.
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
 ~~~ruby
@@ -385,11 +399,16 @@ WITH double_points_week AS
 SELECT
 *,
 DATEADD(DAY, 6, join_date) AS double_points_date,
-EOMONTH('2021-01-31') AS last_date
+('2021-01-31') AS last_date
 FROM 
 dbo.members
 )
 ~~~
+
+Steps:
+- Create an intermediate table with the members table.
+- Create a column that tells us the last date at which each customer earns 2x points on all items, use the DATEADD function to add 6 days onto the date where each customer joined the membership program
+- Create a column that states the date at the end of January.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%201.jpg">
@@ -413,11 +432,29 @@ WHERE sales.order_date < double_points_week.last_date
 GROUP BY double_points_week.customer_id;
 ~~~
 
+Steps:
+- Select the intermediate table.
+- Use SUM along with CASE to sum together different scenarios of gaining points:
+  - If the product_name is "sushi, then multiply the price by 20.
+  - If the order date is between the membership join date and the last date at which the customer earns 2x points on all items, then multiply the price by 20.
+  - In all other scenarios, multiply the price by 10.
+- LEFT JOIN the sales table onto the intermediate table through customer_id to move the order_date column over.
+- LEFT JOIN the menu table onto the sales table through the product_id to move the product_name column over.
+- Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%202.jpg">
 </p>
 
+- Customer A had a total of 1370 points at the end of January
+- Customer B had a total of 820 points at the end of January
+
 ### 11. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/16583b5c8ea750108b2de9ce6b8566470ac2c14f/Pictures/recreate%20this%20table.jpg">
+</p>
+
 ~~~ruby
 SELECT 
 sales.customer_id,
@@ -425,7 +462,7 @@ sales.order_date,
 menu.product_name,
 menu.price,
 CASE 
-	WHEN sales.order_date >= members.join_date
+    WHEN sales.order_date >= members.join_date
     THEN 'Y'
     ELSE 'N'
     END AS member
@@ -436,6 +473,15 @@ LEFT JOIN dbo.members
 ON sales.customer_id = members.customer_id
 ORDER BY customer_id, sales.order_date, menu.product_name;
 ~~~
+
+Steps:
+- Select the columns that are shown in the original table, customer_id, order_date, product_name, and price. The member column will have to be created.
+- To create the member column, use a CASE statement:
+  - If the transaction happened after the corresponding customer's membership join date, then output "Y".
+  - In all other scenarios, output "N".
+- LEFT JOIN the menu table onto the sales table through product_id to bring the price and product_name column over.
+- LEFT JOIN the members table onto the sales table through customer_id to bring the join_date column over.
+- Use ORDER BY on customer_id, order_date, and product_name in that order to place all the data in the same order as the original table.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q11%20table.jpg">
