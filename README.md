@@ -214,8 +214,8 @@ WHERE sales.order_date >= members.join_date
 Steps:
 - Create an intermediate table.
 - LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
-- Use WHERE to filter out all transactions that happened before customers became members.
-- Use DENSE_RANK() along with PARTITION BY to rank the products by ASCENDING order_date within each subset of unique customer_id.
+- Use WHERE to filter out all transactions that happened after customers became members.
+- Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by ASCENDING order_date within each subset of unique customer_id.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%201.jpg">
@@ -263,6 +263,12 @@ WHERE sales.order_date < members.join_date
 )
 ~~~
 
+Steps:
+- Create an intermediate table.
+- LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
+- Use WHERE to filter out all transactions that happened before customers became members.
+- Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by DESCENDING order_date within each subset of unique customer_id.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%201.jpg">
 </p>
@@ -279,9 +285,18 @@ WHERE rank = 1
 ORDER BY customer_id ASC;
 ~~~
 
+Steps:
+- From the intermediate table, select the three needed columns for the question, customer_id, product_name, and order_date.
+- LEFT JOIN the menu table onto the intermediate table through product_id to bring the product_name column over
+- Use WHERE to select all rows where the rank is 1. In this case, when rank = 1, it represents the latest transaction at which the person was not a member.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%202.jpg">
 </p>
+
+- Customer A bought both sushi and curry just before becoming a member.
+- Customer B bought sushi just before becoming a member.
+- Customer C never became a member, therefore leaving them with no meal purchased before becoming a member.
 
 ### 8. What is the total items and amount spent for each member before they became a member?
 ~~~ruby
@@ -299,6 +314,11 @@ WHERE sales.order_date < members.join_date
 )
 ~~~
 
+Steps:
+- Create an intermediate table.
+- LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
+- Use WHERE to filter out all transactions that happened before customers became members.
+
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%201.jpg">
 </p>
@@ -313,6 +333,12 @@ LEFT JOIN dbo.menu
 ON menu.product_id = before_member_transactions.product_id
 GROUP BY customer_id;
 ~~~
+
+Steps:
+- Select the intermediate table.
+- LEFT JOIN the menu table onto the intermediate table through product_id to bring the product_name column over.
+- Use COUNT to aggregate the amount of products bought and SUM to add up all the money spent by each customer.
+- Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
 
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%202.jpg">
