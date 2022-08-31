@@ -53,6 +53,7 @@ Steps:
 - LEFT JOIN menu table onto sales table through product_id.
 - GROUP BY customer_id with aggregate function on "price" column to find out how much was spent by each customer.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
 </p>
@@ -77,6 +78,7 @@ Steps:
 - Use COUNT aggregate function in order to count all of the UNIQUE dates on which the customer went to the resturant
 - Use GROUP BY customer_id to aggregate by each customer.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q2%20table.jpg">
 </p>
@@ -105,6 +107,7 @@ Steps:
 - LEFT JOIN the menu table onto the sales table through product id in order to have the product_name column in the intermediate table.
 - Use DENSE_RANK with PARTITION BY in order to rank each transaction by order date (ASC in order to have the earliest date rank the lowest) within each subset of different customer_id.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%201.jpg">
 </p>
@@ -120,6 +123,7 @@ Steps:
 - Use the WHERE function to keep rows that have "1" for their rank. We do this because the "1" in the rank column means that this is the first transaction that was made by each customer.
 - GROUP BY both customer_id and product_name to make sure all unique combinations are output.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%202.jpg">
 </p>
@@ -149,6 +153,8 @@ Steps:
 - ORDER BY DESC on the "most_purchased" column to find the most_purchased product
 - Use TOP 1 to select the first row of the output table. 
 
+
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q4%20table.jpg">
 </p>
@@ -180,6 +186,7 @@ Steps:
 - GROUP BY both customer_id and product_name to get the total counts of each unique product that each customer bought.
 - Use DENSE_RANK() along with PARTITION BY to rank the products by most ordered to least ordered within each subset of unique customer_id
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%201.jpg">
 </p>
@@ -194,6 +201,7 @@ Steps:
 - From the intermediate table, select the three needed columns for the question, customer_id, product_name, and num_orders.
 - Use the WHERE function to keep rows that have "1" for their rank. We do this because the "1" in the rank column means that this is the product that each customer bought the most.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%202.jpg">
 </p>
@@ -227,6 +235,7 @@ Steps:
 - Use WHERE to filter out all transactions that happened after customers became members.
 - Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by ASCENDING order_date within each subset of unique customer_id.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%201.jpg">
 </p>
@@ -248,6 +257,7 @@ Steps:
 - LEFT JOIN the menu table onto the intermediate table through product_id to bring the product_name column over
 - Use WHERE to select all rows where the rank is 1. In this case, when rank = 1, it represents the earliest transaction at which the person was a member.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%202.jpg">
 </p>
@@ -281,6 +291,7 @@ Steps:
 - Use WHERE to filter out all transactions that happened before customers became members.
 - Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by DESCENDING order_date within each subset of unique customer_id.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%201.jpg">
 </p>
@@ -302,6 +313,7 @@ Steps:
 - LEFT JOIN the menu table onto the intermediate table through product_id to bring the product_name column over
 - Use WHERE to select all rows where the rank is 1. In this case, when rank = 1, it represents the latest transaction at which the person was not a member.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%202.jpg">
 </p>
@@ -333,6 +345,7 @@ Steps:
 - LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
 - Use WHERE to filter out all transactions that happened before customers became members.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%201.jpg">
 </p>
@@ -354,6 +367,7 @@ Steps:
 - Use COUNT to aggregate the amount of products bought and SUM to add up all the money spent by each customer.
 - Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
 
+Final Table
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%202.jpg">
 </p>
@@ -389,6 +403,7 @@ Steps:
 - Use the CASE statement to create the points column. Because sushi gives us a 2x points multiplier, using the CASE statement allows us to multiply the price value by 2 when the row's product_id is "1", which is sushi. In all other scenarios of product_id, the price is multiplied by 10.
 - LEFT JOIN the menu table onto the sales table through the product_id column to bring the price column over.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%201.jpg">
 </p>
@@ -404,6 +419,7 @@ Steps:
 - Use SUM to sum together the number of points collected by each customer.
 - Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%202.jpg">
 </p>
@@ -432,6 +448,7 @@ Steps:
 - Create a column that tells us the last date at which each customer earns 2x points on all items, use the DATEADD function to add 6 days onto the date where each customer joined the membership program
 - Create a column that states the date at the end of January.
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%201.jpg">
 </p>
@@ -464,6 +481,7 @@ Steps:
 - LEFT JOIN the menu table onto the sales table through the product_id to move the product_name column over.
 - Use GROUP BY on customer_id to apply the aggregate functions on each of the customer_ids.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%202.jpg">
 </p>
@@ -535,6 +553,7 @@ ON sales.customer_id = members.customer_id
 )
 ~~~
 
+Intermediate Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q12%20table%201.jpg">
 </p>
@@ -549,6 +568,7 @@ CASE
 FROM q11_table;
 ~~~
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q12%20table%202.jpg">
 </p>
