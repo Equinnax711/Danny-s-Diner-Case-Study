@@ -19,17 +19,17 @@ There are 3 key datasets for this case study, of which they and the relationship
 
 Sales Table:
 <p align="center">
-  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Sales.jpg">
+  <img width="400" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Sales.jpg">
 </p>
 
 Menu Table:
 <p align="center">
-  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Menu.jpg>
+  <img width="400" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8e3853a149cc1d3ded19a5a1c2bc9044ff83e3e0/Pictures/Menu.jpg">
 </p>
 
 Members Table:
 <p align="center">
-  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Member.jpg">
+  <img width="400" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/8512a70055009fc7ecae35de67f7c2180bd2b149/Pictures/Member.jpg">
 </p>
 
 Relationship Diagram:
