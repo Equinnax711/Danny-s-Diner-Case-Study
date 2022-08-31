@@ -57,9 +57,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q1%20table.jpg">
 </p>
 
+Conclusion:
 - Customer A spent a total of $76.
 - Customer B spent a total of $74.
 - Customer C spent a total of $36.
+
 
 ### 2. How many days has each customer visited the restaurant?
 ~~~ruby
@@ -79,9 +81,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q2%20table.jpg">
 </p>
 
+Conclusion:
 - Customer A visited the restaurant 4 times.
 - Customer B visited the restaurant 6 times.
 - Customer C visited the restaurant 2 times.
+
 
 ### 3. What was the first item from the menu purchased by each customer?
 ~~~ruby
@@ -120,9 +124,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/cde92ca941817e7810bde54bf7a2d4cd0ea3e185/Pictures/Q3%20table%202.jpg">
 </p>
 
+Conclusion:
 - Customer A's first items were curry and sushi. He has two first items because they were purchased on the same day and we don't have the information to conclude which one was ordered first.
 - Customer B's first item was curry.
 - Customer C's first item was ramen.
+
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 ~~~ruby
@@ -147,7 +153,9 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q4%20table.jpg">
 </p>
 
+Conclusion:
 - The most purchased item on the menu was ramen and it was purchased to total of 8 times.
+
 
 ### 5. Which item was the most popular for each customer?
 ~~~ruby
@@ -190,9 +198,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q5%20table%202.jpg">
 </p>
 
+Conclusion:
 - Customer A bought ramen the most with a total of 3 purchases.
 - Customer B purchased ramen, curry, and sushi two times each.
 - Customer C bought ramen the most with a total of 3 purchases
+
 
 ### 6. Which item was purchased first by the customer after they became a member?
 ~~~ruby
@@ -242,9 +252,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q6%20table%202.jpg">
 </p>
 
+Conclusion:
 - The item purchased first by customer A after they became a member was curry.
 - The item purchased first by customer B after they became a member was sushi.
 - Customer C never became a member, therefore leaving them with no first meal purchased after becoming a member.
+
 
 ### 7. Which item was purchased just before the customer became a member?
 ~~~ruby
@@ -294,9 +306,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/5dcd3f3481d1bbcfa49fdd012ac0e4eed234f735/Pictures/Q7%20table%202.jpg">
 </p>
 
+Conclusion:
 - Customer A bought both sushi and curry just before becoming a member.
 - Customer B bought sushi just before becoming a member.
 - Customer C never became a member, therefore leaving them with no meal purchased before becoming a member.
+
 
 ### 8. What is the total items and amount spent for each member before they became a member?
 ~~~ruby
@@ -344,6 +358,12 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q8%20table%202.jpg">
 </p>
 
+Conlusion:
+- Customer A bought 2 items and spent a total of 25 dollars.
+- Customer B bought 3 items and spent a total of 40 dollars.
+- Customer C never became a member.
+
+
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
 ~~~ruby
 WITH points AS
@@ -388,9 +408,11 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q9%20table%202.jpg">
 </p>
 
+Conclusion:
 - Customer A had a sum of 860 points.
 - Customer B had a sum of 940 points.
 - Customer C had a sum of 360 points.
+
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
 ~~~ruby
@@ -446,8 +468,10 @@ Steps:
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q10%20table%202.jpg">
 </p>
 
+Conclusion:
 - Customer A had a total of 1370 points at the end of January
 - Customer B had a total of 820 points at the end of January
+
 
 ### 11. The following questions are related creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL. Recreate the following table output using the available data:
 
@@ -483,9 +507,11 @@ Steps:
 - LEFT JOIN the members table onto the sales table through customer_id to bring the join_date column over.
 - Use ORDER BY on customer_id, order_date, and product_name in that order to place all the data in the same order as the original table.
 
+Final Table:
 <p align="center">
   <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/d1f1184738ddfa2e3ea176b1438989b165beede5/Pictures/Q11%20table.jpg">
 </p>
+
 
 ### 12. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
 ~~~ruby
@@ -517,7 +543,7 @@ ON sales.customer_id = members.customer_id
 SELECT 
 *,
 CASE 
-	WHEN q11_table.member = 'N' THEN NULL
+    WHEN q11_table.member = 'N' THEN NULL
     ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY customer_id, order_date, product_name) 
     END AS ranking
 FROM q11_table;
