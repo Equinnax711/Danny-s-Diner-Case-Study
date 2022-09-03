@@ -52,7 +52,7 @@ Relationship Diagram:
 13. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
 
 ## Solutions
-For this case study, I used Microsoft SQL Server to query data for the solutions. Aggregate, numerical, joins, temporary tables, and windows functions were some of the main functions used to complete the case study.
+For this case study, I used Microsoft SQL to query data for the solutions. Aggregate, numerical, joins, temporary tables, and windows functions were some of the main functions used to complete the case study.
 ### 1. What is the total amount each customer spent at the restaurant?
 ~~~ruby
 SELECT
