@@ -612,12 +612,12 @@ After answering all of these case study questions, I've gathered several key ins
 - Customer B visited the diner the most at a total of 6 visits while Customer C only visited twice.
 - Ramen is the most popular food item on the menu with a total count of 8 purchases.
 - Customers A & C both really like ramen, buying this item the most whenever coming to the diner. Customer B on the other hand seems to like all the menu items equally, buying each item two times.
-- Customer A will have a total of 1370 points by the end of January and Customer B will have a total of 820 points by the end of February.
+- Customer A will have a total of 1370 points by the end of January and Customer B will have a total of 820 points by the end of January.
 
-With these point values, I recommend Danny's Diner give each customer personalized deals that cost points to use!
+With these point values, I recommend Danny's Diner give each customer personalized deals they can redeem points to use!
 - For Customer A, since he likes ramen the most and seems to purchase more than one meal on a single day, letting him get a buy one get one free coupon for 1000 points would be great for keeping him coming back!
 - For Customer B, letting him get any one item for half price for 800 points would be perfect! Since B is a foodie and loves all the products on the menu, catering to that aspect would help attract them back for more food.
-- For Customer C, giving him extra noodles on their ramen for 200 points would work out great. Since they come seldomly and seem to only order ramen, giving them extra noodles would attract them back for more.
+- For Customer C, giving him extra noodles on their ramen for 200 points would work out great. Since they seldomly come to the diner and seem to only order ramen, giving them extra noodles would attract them back for more.
 
 
 
