@@ -248,7 +248,7 @@ WHERE sales.order_date >= members.join_date
 Steps:
 - Create an intermediate table.
 - LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
-- Use WHERE to filter out all transactions that happened after customers became members.
+- Use WHERE to filter out all transactions that happened before customers became members.
 - Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by ASCENDING order_date within each subset of unique customer_id.
 
 Intermediate Table:
@@ -304,7 +304,7 @@ WHERE sales.order_date < members.join_date
 Steps:
 - Create an intermediate table.
 - LEFT JOIN the members table onto the sales table through the customer_id column to bring the join_date column over.
-- Use WHERE to filter out all transactions that happened before customers became members.
+- Use WHERE to filter out all transactions that happened after customers became members.
 - Use DENSE_RANK() along with PARTITION BY to rank the transaction dates by DESCENDING order_date within each subset of unique customer_id.
 
 Intermediate Table:
@@ -416,7 +416,7 @@ ON menu.product_id = sales.product_id
 
 Steps:
 - Create an intermediate table.
-- Use the CASE statement to create the points column. Because sushi gives us a 2x points multiplier, using the CASE statement allows us to multiply the price value by 2 when the row's product_id is "1", which is sushi. In all other scenarios of product_id, the price is multiplied by 10.
+- Use the CASE statement to create the points column. Because sushi gives us a 2x points multiplier, using the CASE statement allows us to multiply the price value by 20 when the row's product_id is "1", which is sushi. In all other scenarios of product_id, the price is multiplied by 10.
 - LEFT JOIN the menu table onto the sales table through the product_id column to bring the price column over.
 
 Intermediate Table:
@@ -548,6 +548,11 @@ Final Table:
 
 
 ### 12. Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program. Recreate the following table output using the available data:
+
+<p align="center">
+  <img width="1000" src="https://github.com/Equinnax711/Dannys-Diner-Case-Study/blob/f810ab1975c6ea0bdca96b939d702374f9f49cc8/Pictures/recreate%20this%20table%20%232.jpg">
+</p>
+
 ~~~ruby
 WITH q11_table AS
 (
